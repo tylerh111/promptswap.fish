@@ -63,5 +63,5 @@ function themeswap --description 'Swap fish themes'
 end
 
 function __themeswap_names
-    fish_config theme list
+    fish_config theme list | sort -u
 end
