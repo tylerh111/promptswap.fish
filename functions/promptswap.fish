@@ -44,5 +44,5 @@ function promptswap --description 'Swap fish prompts'
 end
 
 if status is-interactive; and set -q __promptswap_current
-    promptswap $__promptswap_current
+    promptswap choose $__promptswap_current
 end
