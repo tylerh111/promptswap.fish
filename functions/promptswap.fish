@@ -1,6 +1,11 @@
-# promptswap: `promptswap` lists prompts, `promptswap <name>` switches (persisted)
-# custom prompts live in ~/.config/fish/prompts/<name>.fish and define fish_prompt
-# (and optionally fish_right_prompt); custom names take precedence over builtins
+# promptswap:
+#   * `promptswap choose <name>` chooses a prompt (persisted).
+#   * `promptswap show [<name>]` show a prompt.
+#   * `promptswap list` lists available prompts.
+#
+# Custom prompts live in ~/.config/fish/prompts/<name>.fish and MAY define
+# `fish_prompt` and/or `fish_right_prompt`. Custom prompts take precedence
+# over builtin prompts.
 
 function promptswap --description 'Swap fish prompts'
 
@@ -12,8 +17,10 @@ function promptswap --description 'Swap fish prompts'
             echo "promptswap v0.1"
         case "" -h --help
             echo "usage: promptswap choose <prompt>     Choose a prompt"
+            echo "       promptswap show [<prompt>]     Show a prompt"
             echo "       promptswap list                List available prompts"
-            echo "       promptswap show                Show current prompt"
+            echo "       promptswap -v|--version        Print version"
+            echo "       promptswap -h|--help           Print help"
 
         case choose
             set -l name $argv[2]
@@ -28,6 +35,9 @@ function promptswap --description 'Swap fish prompts'
             end
             set -U __promptswap_current $name
 
+        case show
+            echo "TODO"
+
         case list
             for name in (path basename -E $dir/*.fish; fish_config prompt list | sort -u)
                 if test "$name" = "$__promptswap_current"
@@ -36,9 +46,6 @@ function promptswap --description 'Swap fish prompts'
                     echo "  $name"
                 end
             end
-
-        case show
-            echo "TODO"
 
     end
 end
