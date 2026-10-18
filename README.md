@@ -1,6 +1,6 @@
 # Promptswap.fish
 
-Promptswap is a simple tool that allows users to swap between different fish shell prompts including built-in and custom prompts.
+`promptswap` is a simple tool that allows users to swap between different fish shell prompts including built-in and custom prompts.
 
 ```bash
 fisher install tylerh111/promptswap.fish
@@ -33,3 +33,42 @@ promptswap choose lambda
 
 Prompts can also be added without fisher by putting the file in `~/.config/fish/functions`.
 Installed prompts take precedence over built-in prompts with the same name.
+
+# Themeswap.fish
+
+`themeswap` is a simple tool that allows users to swap between different fish shell color themes including built-in and custom themes.
+
+```bash
+themeswap choose  <theme>      # choose a theme
+themeswap show   [<theme>...]  # show themes (default: all)
+themeswap list                 # list available themes
+```
+
+Choosing a theme sets the universal variable `themeswap_current`, which applies the theme in every running shell and in every new shell.
+The theme is applied with `fish_config theme choose`, so it doesn't overwrite any universal color variables (e.g. from `fish_config theme save`); it only shadows them.
+
+## Writing a theme
+
+A theme is a file named `<name>.theme` containing color variables, one per line:
+
+```
+fish_color_command blue
+fish_color_param cyan
+fish_color_comment brblack --italics
+```
+
+To distribute a theme with fisher, put it in the `themes` directory of its repository:
+
+```
+lambda.fish/
+└── themes/
+    └── lambda.theme
+```
+
+```bash
+fisher install tylerh111/lambda.fish
+themeswap choose lambda
+```
+
+Themes can also be added without fisher by putting the file in `~/.config/fish/themes`.
+Installed themes take precedence over built-in themes with the same name.
