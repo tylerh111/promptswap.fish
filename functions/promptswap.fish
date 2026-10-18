@@ -18,13 +18,8 @@ function promptswap --description 'Swap fish prompts'
         case choose
             set -l name $argv[2]
             if test -f $dir/$name.fish
-                if string match -rq '^\s*functions\s+fish_prompt\b' <$dir/$name.fish
-                    functions -e fish_prompt fish_right_prompt
-                    source $dir/$name.fish
-                else
-                    echo "promptswap: invalid prompt '$name'" >&2
-                    return 2
-                end
+                functions -e fish_prompt fish_right_prompt
+                source $dir/$name.fish
             else if contains -- $name (fish_config prompt list)
                 fish_config prompt choose $name
             else
